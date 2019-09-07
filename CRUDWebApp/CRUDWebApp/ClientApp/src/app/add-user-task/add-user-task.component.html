@@ -1,0 +1,65 @@
+<h1>{{title}}</h1>
+<h3>Task</h3>
+<hr />
+<form [formGroup]="userTaskForm" (ngSubmit)="save()" #formDir="ngForm" novalidate>
+
+    <div class="form-group row">
+        <label class=" control-label col-md-12">Task Name</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" formControlName="taskName">
+        </div>
+        <span class="text-danger" *ngIf="taskName.invalid && formDir.submitted">
+            Task Name is required.
+        </span>
+    </div>
+
+    <div class="form-group row">
+        <label class=" control-label col-md-12">Description</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" formControlName="description">
+        </div>
+        <span class="text-danger" *ngIf="description.invalid && formDir.submitted">
+            Description is required.
+        </span>
+    </div>
+
+    <div class="form-group row">
+        <label class=" control-label col-md-12">Start Date</label>
+        <div class="col-md-4">
+            <input type="date" value="2019-09-07" formControlName="startDate">
+        </div>
+        <span class="text-danger" *ngIf="startDate.invalid && formDir.submitted">
+            Start Date is required.
+        </span>
+    </div>
+
+    <div class="form-group row">
+        <label class=" control-label col-md-12">End Date</label>
+        <div class="col-md-4">
+            <input type="date" value="2019-09-07" formControlName="endDate">
+        </div>
+        <span class="text-danger" *ngIf="endDate.invalid && formDir.submitted">
+            End Date is required.
+        </span>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-md-12" for="User">User</label>
+        <div class="col-md-4">
+            <select class="form-control" data-val="true" formControlName="assignedUserId">
+                <option value="">--Select User--</option>
+                <option *ngFor="let user of userList" value={{user.id}}>
+                    {{user.firstName}}
+                </option>
+            </select>
+        </div>
+        <span class="text-danger" *ngIf="assignedUserId.invalid && formDir.submitted">
+            User is required
+        </span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-default">Save</button>
+        <button class="btn" (click)="cancel()">Cancel</button>
+    </div>
+</form>
